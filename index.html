@@ -58,6 +58,50 @@
             font-size: 1.1em;
             line-height: 1.8;
             color: #555;
+            margin-bottom: 15px;
+        }
+
+        .price-highlight {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .success-message h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .success-message p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-section {
@@ -73,6 +117,7 @@
             margin-bottom: 8px;
             font-weight: bold;
             color: #333;
+            font-size: 1.1em;
         }
 
         input[type="number"] {
@@ -90,9 +135,75 @@
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
+        .calculation-display {
+            background: #f8f9ff;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .calculation-display.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .calculation-text {
+            font-size: 1.2em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .calculation-amount {
+            font-size: 2em;
+            color: #ff6b6b;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .payment-section {
+            text-align: center;
+            margin: 30px 0;
+            display: none;
+        }
+
+        .payment-section.show {
+            display: block;
+        }
+
+        .payment-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(238, 90, 82, 0.4);
+        }
+
+        .payment-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(238, 90, 82, 0.6);
+        }
+
         .tickets-container {
             display: none;
             margin-top: 30px;
+        }
+
+        .tickets-container.show {
+            display: block;
         }
 
         .tickets-grid {
@@ -137,49 +248,6 @@
             box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
         }
 
-        .total-section {
-            background: linear-gradient(135deg, #4ecdc4, #44a08d);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        .total-section h2 {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-
-        .total-amount {
-            font-size: 2.5em;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .payment-section {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .payment-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(238, 90, 82, 0.4);
-        }
-
-        .payment-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(238, 90, 82, 0.6);
-        }
-
         .hidden {
             display: none !important;
         }
@@ -197,8 +265,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .total-amount {
-                font-size: 2em;
+            .calculation-amount {
+                font-size: 1.5em;
             }
         }
     </style>
@@ -206,38 +274,50 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎗️ Rifa a Beneficio por Jorge Álvarez 🎗️</h1>
+            <h1> Rifa a Beneficio por Jorge Álvarez </h1>
         </div>
         
         <div class="content">
+            <!-- Mensaje de pago exitoso -->
+            <div class="success-message" id="successMessage">
+                <h2>🎉 ¡Pago Exitoso!</h2>
+                <p>Gracias por tu colaboración. Ahora puedes completar los datos de los participantes para cada ticket.</p>
+            </div>
+
             <div class="story">
                 <p><strong>El pasado 5 de abril, Jorge sufrió un accidente que lo mantuvo hospitalizado durante un mes y luego comenzó un proceso de rehabilitación intensiva. Los costos de la clínica y la recuperación han sido muy elevados, y como familia, nos está siendo difícil afrontarlos. Por eso, hemos organizado esta rifa con el fin de recaudar fondos para su tratamiento.</strong></p>
+                
+                <div class="price-highlight">
+                    💰 Valor por ticket: $5.000
+                </div>
             </div>
 
             <div class="form-section">
                 <div class="form-group">
-                    <label for="numTickets">¿Cuántas rifas quiere comprar?</label>
-                    <input type="number" id="numTickets" min="1" max="50" placeholder="Ingrese el número de rifas">
+                    <label for="numTickets">¿Cuántos tickets quiere comprar?</label>
+                    <input type="number" id="numTickets" min="1" max="50" placeholder="Ingrese el número de tickets">
+                </div>
+
+                <!-- Mostrar cálculo del monto -->
+                <div class="calculation-display" id="calculationDisplay">
+                    <div class="calculation-text" id="calculationText">Total a pagar:</div>
+                    <div class="calculation-amount" id="calculationAmount">$0</div>
+                </div>
+
+                <!-- Botón de pago -->
+                <div class="payment-section" id="paymentSection">
+                    <a href="https://www.flow.cl/btn.php?token=rebc7f52be40223e86435f968181dc93bd3ab804" 
+                       class="payment-button" target="_blank" id="paymentButton">
+                        💳 Proceder al Pago
+                    </a>
                 </div>
             </div>
 
+            <!-- Formulario de tickets (se muestra después del pago exitoso) -->
             <div class="tickets-container" id="ticketsContainer">
                 <h2 style="color: #667eea; margin-bottom: 20px; text-align: center;">Complete los datos de los participantes</h2>
                 <div class="tickets-grid" id="ticketsGrid">
                     <!-- Los tickets se generarán aquí dinámicamente -->
-                </div>
-
-                <div class="total-section">
-                    <h2>Total a Pagar</h2>
-                    <div class="total-amount" id="totalAmount">$0</div>
-                    <p style="margin-top: 10px; opacity: 0.9;">Cada rifa cuesta $5.000</p>
-                </div>
-
-                <div class="payment-section">
-                    <a href="https://www.flow.cl/btn.php?token=qdff0a88d2e05e8f7c8cadf88606b3e241ff305c" 
-                       class="payment-button" target="_blank">
-                        💳 Proceder al Pago
-                    </a>
                 </div>
             </div>
         </div>
@@ -245,29 +325,74 @@
 
     <script>
         const numTicketsInput = document.getElementById('numTickets');
+        const calculationDisplay = document.getElementById('calculationDisplay');
+        const calculationText = document.getElementById('calculationText');
+        const calculationAmount = document.getElementById('calculationAmount');
+        const paymentSection = document.getElementById('paymentSection');
         const ticketsContainer = document.getElementById('ticketsContainer');
         const ticketsGrid = document.getElementById('ticketsGrid');
-        const totalAmount = document.getElementById('totalAmount');
+        const successMessage = document.getElementById('successMessage');
+
+        // Verificar si viene de un pago exitoso
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentSuccess = urlParams.get('payment') === 'success';
+        const numTicketsFromURL = parseInt(urlParams.get('tickets')) || 0;
+
+        if (paymentSuccess && numTicketsFromURL > 0) {
+            // Mostrar mensaje de éxito
+            successMessage.classList.add('show');
+            
+            // Mostrar los campos para completar los datos
+            numTicketsInput.value = numTicketsFromURL;
+            generateTickets(numTicketsFromURL);
+            ticketsContainer.classList.add('show');
+            
+            // Ocultar sección de pago
+            calculationDisplay.style.display = 'none';
+            paymentSection.style.display = 'none';
+            
+            // Scroll al mensaje de éxito
+            setTimeout(() => {
+                successMessage.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
 
         numTicketsInput.addEventListener('input', function() {
             const numTickets = parseInt(this.value);
             
             if (numTickets > 0 && numTickets <= 50) {
-                generateTickets(numTickets);
-                updateTotal(numTickets);
-                ticketsContainer.style.display = 'block';
+                updateCalculation(numTickets);
+                calculationDisplay.classList.add('show');
+                paymentSection.classList.add('show');
                 
-                // Smooth scroll to tickets section
+                // Actualizar el enlace de pago con el número de tickets
+                const paymentButton = document.getElementById('paymentButton');
+                const baseURL = 'https://www.flow.cl/btn.php?token=rebc7f52be40223e86435f968181dc93bd3ab804';
+                paymentButton.href = `${baseURL}&tickets=${numTickets}`;
+                
+                // Smooth scroll to calculation
                 setTimeout(() => {
-                    ticketsContainer.scrollIntoView({ 
+                    calculationDisplay.scrollIntoView({ 
                         behavior: 'smooth',
-                        block: 'start'
+                        block: 'center'
                     });
                 }, 100);
             } else {
-                ticketsContainer.style.display = 'none';
+                calculationDisplay.classList.remove('show');
+                paymentSection.classList.remove('show');
+                ticketsContainer.classList.remove('show');
             }
         });
+
+        function updateCalculation(num) {
+            const total = num * 5000;
+            const ticketText = num === 1 ? 'ticket' : 'tickets';
+            calculationText.textContent = `${num} ${ticketText} × $5.000 =`;
+            calculationAmount.textContent = '$' + total.toLocaleString('es-CL');
+        }
 
         function generateTickets(num) {
             ticketsGrid.innerHTML = '';
@@ -276,21 +401,13 @@
                 const ticket = document.createElement('div');
                 ticket.className = 'ticket';
                 ticket.innerHTML = `
-                    <h3>🎫 Rifa #${i}</h3>
-                    <input type="text" placeholder="Nombre" required>
-                    <input type="text" placeholder="Apellido" required>
+                    <h3>🎫 Ticket #${i}</h3>
+                    <input type="text" placeholder="Nombre completo del participante" required>
+                    <input type="email" placeholder="Email (opcional)">
+                    <input type="tel" placeholder="Teléfono (opcional)">
                 `;
                 ticketsGrid.appendChild(ticket);
             }
-        }
-
-        function updateTotal(num) {
-            const total = num * 5000;
-            totalAmount.textContent = '$' + total.toLocaleString('es-CL');
-        }
-
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     </script>
 </body>
