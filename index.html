@@ -73,6 +73,73 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
+        /* PREMIOS SECTION */
+        .prizes-section {
+            background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .prizes-section h3 {
+            color: #ff6b6b;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+        }
+
+        .prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .prize-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .prize-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .prize-icon {
+            font-size: 2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .prize-item p {
+            color: #333;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .prize-item small {
+            color: #667eea;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .more-prizes {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 8px;
+        }
+
+        .more-prizes p {
+            color: #ff6b6b;
+            font-size: 1.1em;
+        }
+
         .purchase-section {
             margin: 40px 0;
         }
@@ -185,72 +252,6 @@
             line-height: 1.6;
         }
 
-        .prizes-section {
-            background: linear-gradient(135deg, #fff5f5, #ffe8e8);
-            padding: 30px;
-            border-radius: 10px;
-            margin: 30px 0;
-            border-left: 5px solid #ff6b6b;
-        }
-
-        .prizes-section h3 {
-            color: #ff6b6b;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.5em;
-        }
-
-        .prizes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .prize-item {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .prize-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .prize-icon {
-            font-size: 2em;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .prize-item p {
-            color: #333;
-            font-weight: bold;
-            line-height: 1.4;
-        }
-
-        .prize-item small {
-            color: #667eea;
-            font-weight: normal;
-            font-style: italic;
-        }
-
-        .more-prizes {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 107, 107, 0.1);
-            border-radius: 8px;
-        }
-
-        .more-prizes p {
-            color: #ff6b6b;
-            font-size: 1.1em;
-        }
-
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2em;
@@ -262,6 +263,10 @@
             
             .calculation-amount {
                 font-size: 1.5em;
+            }
+
+            .prizes-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -278,6 +283,40 @@
                 
                 <div class="price-highlight">
                     💰 Valor por ticket: $5.000
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE PREMIOS -->
+            <div class="prizes-section">
+                <h3>🏆 Premios Increíbles</h3>
+                <div class="prizes-grid">
+                    <div class="prize-item">
+                        <span class="prize-icon">💄</span>
+                        <p>Maquillaje social Amalia Prieto <br><small>(@makeupbyamaliap)</small></p>
+                    </div>
+                    <div class="prize-item">
+                        <span class="prize-icon">🧘‍♀️</span>
+                        <p>Un mes de clases de yoga online o presencial <br><small>(@sercrisalida.cl)</small></p>
+                    </div>
+                    <div class="prize-item">
+                        <span class="prize-icon">👗</span>
+                        <p>2 delantales de lino español</p>
+                    </div>
+                    <div class="prize-item">
+                        <span class="prize-icon">🦷</span>
+                        <p>Pack atención dental: radiografías, limpieza y blanqueamiento <br><small>(@marfil.dental)</small></p>
+                    </div>
+                    <div class="prize-item">
+                        <span class="prize-icon">👔</span>
+                        <p>1 camisa marca Piola</p>
+                    </div>
+                    <div class="prize-item">
+                        <span class="prize-icon">🏠</span>
+                        <p>Set de mantelería Reina Casa</p>
+                    </div>
+                </div>
+                <div class="more-prizes">
+                    <p>✨ <strong>¡Y muchos premios más por confirmar!</strong> ✨</p>
                 </div>
             </div>
 
@@ -309,11 +348,6 @@
                 <p><strong>4. ⚠️ IMPORTANTE:</strong> Cuando veas "PAGO EXITOSO" en la plataforma de pago, <strong>haz click en "CONTINUAR"</strong> para volver y registrar los nombres de los participantes</p>
                 <p><strong>5.</strong> Completa los nombres y teléfonos de cada participante</p>
                 <p><strong>6.</strong> ¡Listo! Ya estás participando en la rifa</p>
-            </div>
-
-            <div class="info-section" style="background: #fff3cd; border-left-color: #ffc107;">
-                <h3 style="color: #856404;">⚠️ Muy Importante</h3>
-                <p style="color: #856404;"><strong>NO cierres la ventana después del pago.</strong> La plataforma te mostrará "PAGO EXITOSO" y un botón "CONTINUAR" - debes hacer click ahí para completar el registro de participantes y que tus tickets queden válidos.</p>
             </div>
         </div>
     </div>
