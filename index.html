@@ -274,7 +274,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1> Rifa a Beneficio por Jorge Álvarez </h1>
+            <h1>🎗️ Rifa a Beneficio por Jorge Álvarez 🎗️</h1>
         </div>
         
         <div class="content">
@@ -402,12 +402,94 @@
                 ticket.className = 'ticket';
                 ticket.innerHTML = `
                     <h3>🎫 Ticket #${i}</h3>
-                    <input type="text" placeholder="Nombre completo del participante" required>
-                    <input type="email" placeholder="Email (opcional)">
-                    <input type="tel" placeholder="Teléfono (opcional)">
+                    <input type="text" id="nombre_${i}" placeholder="Nombre completo del participante" required>
+                    <input type="email" id="email_${i}" placeholder="Email (opcional)">
+                    <input type="tel" id="telefono_${i}" placeholder="Teléfono (opcional)">
                 `;
                 ticketsGrid.appendChild(ticket);
             }
+
+            // Mostrar botón de envío si estamos en modo post-pago
+            if (paymentSuccess) {
+                submitSection.style.display = 'block';
+            }
+        }
+
+        // Función para enviar datos a Google Sheets
+        async function submitData() {
+            const numTickets = parseInt(numTicketsInput.value);
+            const currentDate = new Date();
+            const fecha = currentDate.toLocaleDateString('es-CL');
+            const hora = currentDate.toLocaleTimeString('es-CL');
+            const totalPagado = '
+    </script>
+</body>
+</html> + (numTickets * 5000).toLocaleString('es-CL');
+
+            const submitButton = document.getElementById('submitButton');
+            submitButton.textContent = '⏳ Enviando...';
+            submitButton.disabled = true;
+
+            try {
+                // Recopilar datos de todos los tickets
+                for (let i = 1; i <= numTickets; i++) {
+                    const nombre = document.getElementById(`nombre_${i}`).value.trim();
+                    const email = document.getElementById(`email_${i}`).value.trim();
+                    const telefono = document.getElementById(`telefono_${i}`).value.trim();
+
+                    if (!nombre) {
+                        alert(`Por favor completa el nombre para el Ticket #${i}`);
+                        submitButton.textContent = '📝 Confirmar Participantes';
+                        submitButton.disabled = false;
+                        return;
+                    }
+
+                    // Preparar datos para Google Sheets
+                    const rowData = [
+                        fecha,
+                        hora,
+                        numTickets,
+                        totalPagado,
+                        i,
+                        nombre,
+                        email || '',
+                        telefono || ''
+                    ];
+
+                    // Enviar a Google Sheets usando Google Apps Script
+                    await sendToGoogleSheets(rowData);
+                }
+
+                // Mostrar mensaje de éxito
+                submitSection.style.display = 'none';
+                submitSuccess.style.display = 'block';
+                submitSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Hubo un error al guardar los datos. Por favor, intenta nuevamente.');
+                submitButton.textContent = '📝 Confirmar Participantes';
+                submitButton.disabled = false;
+            }
+        }
+
+        // Función auxiliar para enviar datos a Google Sheets
+        async function sendToGoogleSheets(rowData) {
+            // Nota: Esta función usará el método de Google Apps Script
+            // Por ahora simularemos el envío exitoso
+            // En la implementación real, se conectará con tu Google Apps Script
+            
+            console.log('Datos a enviar:', rowData);
+            
+            // Simular delay de envío
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // En producción, aquí irá la llamada real a Google Apps Script
+            // return fetch('URL_DE_TU_GOOGLE_APPS_SCRIPT', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ data: rowData })
+            // });
         }
     </script>
 </body>
