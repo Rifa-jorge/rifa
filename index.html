@@ -73,39 +73,8 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-        .success-message {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 30px;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .success-message h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .success-message p {
-            font-size: 1.1em;
-            opacity: 0.95;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-section {
-            margin-bottom: 30px;
+        .purchase-section {
+            margin: 40px 0;
         }
 
         .form-group {
@@ -197,59 +166,23 @@
             box-shadow: 0 10px 25px rgba(238, 90, 82, 0.6);
         }
 
-        .tickets-container {
-            display: none;
-            margin-top: 30px;
-        }
-
-        .tickets-container.show {
-            display: block;
-        }
-
-        .tickets-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .ticket {
-            background: #fff;
-            border: 2px solid #e0e6ff;
+        .info-section {
+            background: #e8f5e8;
+            padding: 25px;
             border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 30px 0;
+            border-left: 5px solid #28a745;
         }
 
-        .ticket:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .ticket h3 {
-            color: #667eea;
+        .info-section h3 {
+            color: #28a745;
             margin-bottom: 15px;
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
 
-        .ticket input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .ticket input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
-        }
-
-        .hidden {
-            display: none !important;
+        .info-section p {
+            color: #555;
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
@@ -261,10 +194,6 @@
                 padding: 20px;
             }
             
-            .tickets-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .calculation-amount {
                 font-size: 1.5em;
             }
@@ -274,16 +203,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎗️ Rifa a Beneficio por Jorge Álvarez 🎗️</h1>
+            <h1> Rifa a Beneficio por Jorge Álvarez </h1>
         </div>
         
         <div class="content">
-            <!-- Mensaje de pago exitoso -->
-            <div class="success-message" id="successMessage">
-                <h2>🎉 ¡Pago Exitoso!</h2>
-                <p>Gracias por tu colaboración. Ahora puedes completar los datos de los participantes para cada ticket.</p>
-            </div>
-
             <div class="story">
                 <p><strong>El pasado 5 de abril, Jorge sufrió un accidente que lo mantuvo hospitalizado durante un mes y luego comenzó un proceso de rehabilitación intensiva. Los costos de la clínica y la recuperación han sido muy elevados, y como familia, nos está siendo difícil afrontarlos. Por eso, hemos organizado esta rifa con el fin de recaudar fondos para su tratamiento.</strong></p>
                 
@@ -292,10 +215,10 @@
                 </div>
             </div>
 
-            <div class="form-section">
+            <div class="purchase-section">
                 <div class="form-group">
-                    <label for="numTickets">¿Cuántos tickets quiere comprar?</label>
-                    <input type="number" id="numTickets" min="1" max="50" placeholder="Ingrese el número de tickets">
+                    <label for="numTickets">¿Cuántos tickets quieres comprar?</label>
+                    <input type="number" id="numTickets" min="1" max="50" placeholder="Ejemplo: 3">
                 </div>
 
                 <!-- Mostrar cálculo del monto -->
@@ -306,19 +229,18 @@
 
                 <!-- Botón de pago -->
                 <div class="payment-section" id="paymentSection">
-                    <a href="https://www.flow.cl/btn.php?token=rebc7f52be40223e86435f968181dc93bd3ab804" 
-                       class="payment-button" target="_blank" id="paymentButton">
-                        💳 Proceder al Pago
+                    <a href="#" class="payment-button" id="paymentButton" target="_blank">
+                        💳 Comprar Tickets
                     </a>
                 </div>
             </div>
 
-            <!-- Formulario de tickets (se muestra después del pago exitoso) -->
-            <div class="tickets-container" id="ticketsContainer">
-                <h2 style="color: #667eea; margin-bottom: 20px; text-align: center;">Complete los datos de los participantes</h2>
-                <div class="tickets-grid" id="ticketsGrid">
-                    <!-- Los tickets se generarán aquí dinámicamente -->
-                </div>
+            <div class="info-section">
+                <h3>📋 ¿Cómo funciona?</h3>
+                <p><strong>1.</strong> Elige la cantidad de tickets que quieres comprar</p>
+                <p><strong>2.</strong> Haz click en "Comprar Tickets" para ir al pago</p>
+                <p><strong>3.</strong> Después del pago, podrás registrar los nombres de los participantes</p>
+                <p><strong>4.</strong> ¡Listo! Ya estás participando en la rifa</p>
             </div>
         </div>
     </div>
@@ -329,49 +251,19 @@
         const calculationText = document.getElementById('calculationText');
         const calculationAmount = document.getElementById('calculationAmount');
         const paymentSection = document.getElementById('paymentSection');
-        const ticketsContainer = document.getElementById('ticketsContainer');
-        const ticketsGrid = document.getElementById('ticketsGrid');
-        const successMessage = document.getElementById('successMessage');
+        const paymentButton = document.getElementById('paymentButton');
 
-        // Verificar si viene de un pago exitoso
-        const urlParams = new URLSearchParams(window.location.search);
-        const paymentSuccess = urlParams.get('payment') === 'success';
-        const numTicketsFromURL = parseInt(urlParams.get('tickets')) || 0;
-
-        if (paymentSuccess && numTicketsFromURL > 0) {
-            // Mostrar mensaje de éxito
-            successMessage.classList.add('show');
-            
-            // Mostrar los campos para completar los datos
-            numTicketsInput.value = numTicketsFromURL;
-            generateTickets(numTicketsFromURL);
-            ticketsContainer.classList.add('show');
-            
-            // Ocultar sección de pago
-            calculationDisplay.style.display = 'none';
-            paymentSection.style.display = 'none';
-            
-            // Scroll al mensaje de éxito
-            setTimeout(() => {
-                successMessage.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }, 100);
-        }
+        // URL base de Flow
+        const FLOW_BASE_URL = 'https://www.flow.cl/btn.php?token=rebc7f52be40223e86435f968181dc93bd3ab804';
 
         numTicketsInput.addEventListener('input', function() {
             const numTickets = parseInt(this.value);
             
             if (numTickets > 0 && numTickets <= 50) {
                 updateCalculation(numTickets);
+                updatePaymentLink(numTickets);
                 calculationDisplay.classList.add('show');
                 paymentSection.classList.add('show');
-                
-                // Actualizar el enlace de pago con el número de tickets
-                const paymentButton = document.getElementById('paymentButton');
-                const baseURL = 'https://www.flow.cl/btn.php?token=rebc7f52be40223e86435f968181dc93bd3ab804';
-                paymentButton.href = `${baseURL}&tickets=${numTickets}`;
                 
                 // Smooth scroll to calculation
                 setTimeout(() => {
@@ -383,7 +275,6 @@
             } else {
                 calculationDisplay.classList.remove('show');
                 paymentSection.classList.remove('show');
-                ticketsContainer.classList.remove('show');
             }
         });
 
@@ -394,102 +285,9 @@
             calculationAmount.textContent = '$' + total.toLocaleString('es-CL');
         }
 
-        function generateTickets(num) {
-            ticketsGrid.innerHTML = '';
-            
-            for (let i = 1; i <= num; i++) {
-                const ticket = document.createElement('div');
-                ticket.className = 'ticket';
-                ticket.innerHTML = `
-                    <h3>🎫 Ticket #${i}</h3>
-                    <input type="text" id="nombre_${i}" placeholder="Nombre completo del participante" required>
-                    <input type="email" id="email_${i}" placeholder="Email (opcional)">
-                    <input type="tel" id="telefono_${i}" placeholder="Teléfono (opcional)">
-                `;
-                ticketsGrid.appendChild(ticket);
-            }
-
-            // Mostrar botón de envío si estamos en modo post-pago
-            if (paymentSuccess) {
-                submitSection.style.display = 'block';
-            }
-        }
-
-        // Función para enviar datos a Google Sheets
-        async function submitData() {
-            const numTickets = parseInt(numTicketsInput.value);
-            const currentDate = new Date();
-            const fecha = currentDate.toLocaleDateString('es-CL');
-            const hora = currentDate.toLocaleTimeString('es-CL');
-            const totalPagado = '
-    </script>
-</body>
-</html> + (numTickets * 5000).toLocaleString('es-CL');
-
-            const submitButton = document.getElementById('submitButton');
-            submitButton.textContent = '⏳ Enviando...';
-            submitButton.disabled = true;
-
-            try {
-                // Recopilar datos de todos los tickets
-                for (let i = 1; i <= numTickets; i++) {
-                    const nombre = document.getElementById(`nombre_${i}`).value.trim();
-                    const email = document.getElementById(`email_${i}`).value.trim();
-                    const telefono = document.getElementById(`telefono_${i}`).value.trim();
-
-                    if (!nombre) {
-                        alert(`Por favor completa el nombre para el Ticket #${i}`);
-                        submitButton.textContent = '📝 Confirmar Participantes';
-                        submitButton.disabled = false;
-                        return;
-                    }
-
-                    // Preparar datos para Google Sheets
-                    const rowData = [
-                        fecha,
-                        hora,
-                        numTickets,
-                        totalPagado,
-                        i,
-                        nombre,
-                        email || '',
-                        telefono || ''
-                    ];
-
-                    // Enviar a Google Sheets usando Google Apps Script
-                    await sendToGoogleSheets(rowData);
-                }
-
-                // Mostrar mensaje de éxito
-                submitSection.style.display = 'none';
-                submitSuccess.style.display = 'block';
-                submitSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Hubo un error al guardar los datos. Por favor, intenta nuevamente.');
-                submitButton.textContent = '📝 Confirmar Participantes';
-                submitButton.disabled = false;
-            }
-        }
-
-        // Función auxiliar para enviar datos a Google Sheets
-        async function sendToGoogleSheets(rowData) {
-            // Nota: Esta función usará el método de Google Apps Script
-            // Por ahora simularemos el envío exitoso
-            // En la implementación real, se conectará con tu Google Apps Script
-            
-            console.log('Datos a enviar:', rowData);
-            
-            // Simular delay de envío
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            // En producción, aquí irá la llamada real a Google Apps Script
-            // return fetch('URL_DE_TU_GOOGLE_APPS_SCRIPT', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ data: rowData })
-            // });
+        function updatePaymentLink(num) {
+            // Actualizar el enlace de pago con el número de tickets
+            paymentButton.href = `${FLOW_BASE_URL}&tickets=${num}`;
         }
     </script>
 </body>
